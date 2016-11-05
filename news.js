@@ -3,16 +3,13 @@
 var request = require('request');
 var cheerio = require('cheerio');
 
-
 function fetchNews(req, res) {
-
-  // User requested landing page
-  if (req.url === '/') {
 
         // Create Promise for Manoramaonline news
         var manNews = new Promise(function(resolve, reject) {
 
           var url = 'http://www.manoramaonline.com/';
+          // var url = 'http://www.manoramaonline.com/news/just-in.html';
 
           // Make get request to website to get latest news
           request(url, function (error, response, body) {
@@ -23,19 +20,21 @@ function fetchNews(req, res) {
 
               // Select all H2 elements with class .Geoge01
               var news = $('.Georgia01');
-              var newsResponse = '<ul>';
+
+              var newsArray = [];
               var href = '';
               var title = '';
 
               news.each(function(i, elem) {
-                href = news[i].children[0].attribs.href;
+                href = url + news[i].children[0].attribs.href;
                 title = news[i].children[0].attribs.title;
-                newsResponse += '<li><a href="' + url + href + '">' +
-                                 title + '</a></li>';
+                var obj = {};
+                obj.href = href;
+                obj.title = title;
+                newsArray.push(obj);
               }); // End each
-              newsResponse += '</ul>';
 
-              resolve(newsResponse);
+              resolve(newsArray);
 
             } else {
               reject(error);
@@ -55,19 +54,21 @@ function fetchNews(req, res) {
 
               // Select all H2 elements with class .Geoge01
               var news = $('.common_text b');
-              var newsResponse = '<ul>';
+              var newsArray = [];
               var href = '';
               var title = '';
 
               news.each(function(i, elem) {
+                var obj = {};
+
                 href = url.substring(0,26) + news[i].parent.parent.attribs.href;
                 title = news[i].children[0].data;
-                newsResponse += '<li><a href="' + href + '">' +
-                                 title + '</a></li>';
+                obj.href = href;
+                obj.title = title;
+                newsArray.push(obj);
               }); // End each
 
-              newsResponse += '</ul>';
-              resolve(newsResponse);
+              resolve(newsArray);
             } else {
               reject(error);
             }
@@ -76,16 +77,13 @@ function fetchNews(req, res) {
 
         // Once all promises are resolved, display the latest news
         Promise.all([manNews, matNews]).then(function(data) {
-          res.writeHead(200, {'Content-Type' : 'text/html'});
-          res.write(data[0]);
-          res.write(data[1]);
-          res.end();
+          // console.log(data);
+
+          res.render('layout', {newsArray: data[0].concat(data[1])});
         })
         .catch(function(error) {
           console.log('something wrong with request');
         }); // End of Promise.all
-
-  } // End of req.url
 
 } // End of fetchNews
 

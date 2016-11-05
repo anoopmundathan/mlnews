@@ -1,0 +1,11 @@
+doctype html(lang='en')
+head
+    meta(charset='utf-8')
+    title News App
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='css/main.css')
+body
+    ul
+      each news in newsArray
+        li
+          a(href='#{news.href}') #{news.title}
