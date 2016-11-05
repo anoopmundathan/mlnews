@@ -16,7 +16,8 @@ app.get('/', function(req, res) {
   news.fetchNews(req, res);
 });
 
+var port = process.env.PORT || 3000;
 
-app.listen(3000, function() {
-    console.log('Server running at port 3000');
+app.listen(port, function() {
+    console.log('Server running at port ' + port);
 });
