@@ -1,7 +1,9 @@
 # mlnews
 Fetch latest news from regional language websites
 
-## Getting Started
+App is live [here](https://mlnewsapp.herokuapp.com/)
+
+## For Development
 ### Setup
 ```
 $ git clone https://github.com/anoopmundathan/mlnews.git
