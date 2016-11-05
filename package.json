@@ -16,6 +16,9 @@
   "scripts": {
     "test": "mocha"
   },
+  "engines": {
+    "node": "4.4.2"
+  },
   "author": "",
   "license": "ISC"
 }
