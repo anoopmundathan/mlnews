@@ -20,6 +20,7 @@ app.get('/', function(req, res) {
 
 app.get('/news', function(req, res) {
   var url = req.query.link;
+
   request(url, function(error, response, body) {
 
     if (!error && response.statusCode === 200) {
