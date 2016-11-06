@@ -8,7 +8,7 @@ function fetchNews(req, res) {
         // Create Promise for Manoramaonline news
         var manNews = new Promise(function(resolve, reject) {
 
-          var url = 'http://www.manoramaonline.com/';
+          var url = 'http://www.manoramaonline.com';
           // var url = 'http://www.manoramaonline.com/news/just-in.html';
 
           // Make get request to website to get latest news

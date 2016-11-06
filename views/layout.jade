@@ -8,4 +8,6 @@ body
     ul
       each news in newsArray
         li
-          a(href='#{news.href}') #{news.title}
+          a(class='news' href='#{news.href}') #{news.title}
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+    script(src='js/app.js')
