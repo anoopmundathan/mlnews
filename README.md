@@ -16,5 +16,8 @@ $ npm install
 ### Run
 ```
 $ node server.js
-Open browser and vist http://localhost:3000/
+```
+Open browser and visit 
+```
+http://localhost:3000/
 ```
